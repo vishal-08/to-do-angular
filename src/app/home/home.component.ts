@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../task';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,21 @@ import { Task } from '../task';
 })
 export class HomeComponent implements OnInit {
 
-  taskModel = new Task("grocery", "grocery shopping", "09/08/2021", "todo", "8/08/2021", "09/08/2021")
+  lists : any = []
+  
+  
 
-  constructor() { }
+  constructor(private _task : TodoService) { }
 
   ngOnInit(): void {
+    
+    
   }
 
+  getList(){
+    
+  }
+
+
+  
 }

@@ -7,24 +7,28 @@ import { HomeComponent } from './home/home.component';
 import { AddNotesComponent } from './add-notes/add-notes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { TodoService } from './todo.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddNotesComponent,
+    AddNotesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,ReactiveFormsModule
     
   ],
-  providers: [],
+  providers: [DatePipe, TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

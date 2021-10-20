@@ -7,6 +7,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 
 
 const MaterialComponent =[
@@ -16,7 +17,8 @@ const MaterialComponent =[
   MatGridListModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatIconModule
+  MatIconModule,
+  MatListModule
 ]
 
 @NgModule({

@@ -1,13 +1,5 @@
 {
-    "task": [
-      {
-        "title": "lunch",
-        "id": 1,
-        "description" :"had lunch",
-        "duedate" : "12/09/2021",
-        "status" : "todo",
-        "createdby" : "",
-        "modifiedby" : ""
-      }
-    ]
-  }
+  "task": [
+    
+  ]
+}

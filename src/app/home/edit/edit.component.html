@@ -4,38 +4,36 @@
 
         </div>
         <div class="col-md-6">
-            <form action="" [formGroup] = "taskForm" (ngSubmit) = "onSave()">
+            <form action="" >
 
              
-                <h2>Add Task</h2>
+                <h2 style="text-align: center;">Update Task</h2>
                 <div class="input-group mb-3">
                     
                     <span class="input-group-text"><i class='bx bx-align-right' style="font-size: 20px;"></i></span>
-                    <input type="text" class="form-control" placeholder="Title" formControlName = "title">
+                    <input type="text" class="form-control title" placeholder="Title" name="title" [(ngModel)] = "title">
                   </div>
 
-                  
+                    
 
                 <div class="input-group mb-3">
                     
                     <span class="input-group-text"><i class='bx bx-detail' style="font-size: 20px;"></i></span>
-                    <input type="text" class="form-control" placeholder="Details" formControlName = "detail">
+                    <input type="text" class="form-control detail" placeholder="Details" name="detail" [(ngModel)] = "detail" >
                   </div>
                   
 
                   <div class="input-group mb-3">
                    
-                    <span class="input-group-text"><i class='bx bx-calendar-event' style="font-size: 20px;" ></i></span>
-                    <input type="date" class="form-control" placeholder="Due Date" formControlName = "dueDate" data-bs-toggle="tooltip"  title="pick date">
+                    <span class="input-group-text"><i class='bx bx-calendar-event' style="font-size: 20px;"></i></span>
+                    <input type="date" class="form-control dueDate" placeholder="Due Date" name="duedate" [(ngModel)] = "duedate">
                   </div>
                   
 
 
-                <button class="btn btn-primary" id="liveToastBtn" data-bs-toggle="tooltip"  title="Save your Task">Save</button>
+                <button class="btn btn-primary" data-bs-toggle="tooltip"  title="Update Button">Update</button>
 
-               
-
-                <button class="btn btn-info mx-3" (click) = "onCancel()" data-bs-toggle="tooltip"  title="Go back to Home">Cancel</button>
+                <button class="btn btn-info mx-3" (click)="onCancel()" data-bs-toggle="tooltip"  title="Go back to Home">Cancel</button>
 
             </form>
         </div>

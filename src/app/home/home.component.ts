@@ -1,4 +1,6 @@
+import { literalArr } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Task } from '../task';
 import { TodoService } from '../todo.service';
 
@@ -9,14 +11,15 @@ import { TodoService } from '../todo.service';
 })
 export class HomeComponent implements OnInit {
 
-  lists : any = []
+  listsArray : any = []
   
   
 
-  constructor(private _task : TodoService) { }
+  constructor(private _task : TodoService, private _router : Router) { }
 
   ngOnInit(): void {
-    
+    this.listsArray = JSON.parse(localStorage.getItem('taskData')!)
+    console.log(this.listsArray)
     
   }
 

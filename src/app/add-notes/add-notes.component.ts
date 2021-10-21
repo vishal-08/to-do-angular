@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Task } from '../task';
 import { TodoService } from '../todo.service';
 
@@ -13,37 +14,20 @@ import { TodoService } from '../todo.service';
 export class AddNotesComponent implements OnInit {
 
   taskForm!: FormGroup;
+  tasks:any = []
   task: any = {}
-    // taskData:any =[]
-    // dueDate : Date = new Date("")
-    // task:any = {
-    //   title : " ",
-    //   details : " ",
-    //   duedate : this.dueDate
-    // }
-    // taskModel = new Task("", "", this.dueDate, "todo", "8/08/2021", "09/08/2021")
-  // taskData:any =[]
   
-
-  // dueDate : Date = new Date("")
-  // task:any = {
-  //   title : " ",
-  //   details : " ",
-  //   duedate : this.dueDate
-  // }
-  
-
-
-  // taskModel = new Task("", "", this.dueDate, "todo", "8/08/2021", "09/08/2021")
-
-  constructor(private _router: Router, private fb: FormBuilder) { 
+  constructor(private _router: Router, private fb: FormBuilder, private toastr : ToastrService) { 
     
   }
 
 
   
   ngOnInit(): void {
+    
    this.createTaskForm()
+  //  this.tasks = JSON.parse(localStorage.getItem('taskData')!)
+   console.log(this.tasks)
   }
 
   createTaskForm(){
@@ -54,31 +38,36 @@ export class AddNotesComponent implements OnInit {
     })
   }
 
-  onSave(): void{
+  onSave(){
     
-  //   this.taskData.push(this.task)
-  //   console.log(this.taskData)
-  //   localStorage.setItem('taskData', JSON.stringify(this.taskData))
-    
-  //  this._router.navigate(['/home'])
-    console.log(this.taskForm)
-    this.task = Object.assign(this.task, this.taskForm.value)
-    this.addtask(this.task)
+    this.tasks = JSON.parse(localStorage.getItem('taskData')! )
+    this.tasks = this.tasks || []
+    this.tasks.push(this.taskForm.value)
+    localStorage.setItem("taskData",JSON.stringify(this.tasks))
+     this.addTask(this.task)
+    this.toastr.success("Task Added Successfully")
+     this._router.navigate(['/home'])
   }
 
-  addtask(task:any){
-    let taskData = []
-    if(localStorage.getItem('taskData')){
-      taskData = JSON.parse(localStorage.getItem('taskData')!)
-      taskData = [task, ...taskData]
-
+  addTask(task: any){
+    let tasks = []
+     if(localStorage.getItem('taskData')){
+      tasks = JSON.parse(localStorage.getItem('taskData')!)
+      tasks = [task, ...tasks]
+  
+      localStorage.setItem("taskData",JSON.stringify(this.tasks))
     }else{
-      taskData = [task]
+      tasks = [task]
+      localStorage.setItem("taskData",JSON.stringify(this.tasks))
     }
-    localStorage.setItem("taskData",JSON.stringify(taskData))
+
+  
+    
   }
 
   
-  
+  onCancel(){
+      this._router.navigate(['/home'])
+  }
   
 }

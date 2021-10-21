@@ -1,0 +1,31 @@
+<h1 style="text-align: center;">Todo list</h1>
+
+<div class="row">
+
+    <table class="table">
+        <thead>
+            <tr class="table-info">
+                <th scope="col">id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Details</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let list of listsArray; let indexOfelement=index;">
+                <th scope="row">{{indexOfelement + 1}}</th>
+                <td>{{list.title}}</td>
+                <td>{{list.detail}}</td>
+                <td>{{list.dueDate}}</td>
+                <td><i class='bx bxs-trash-alt mx-3' style='color:#fb0909; font-size: 20px;'
+                        (click)='onDelete(indexOfelement)' data-bs-toggle="tooltip" data-bs-placement="left"title="Delete"></i> 
+                        <i class='bx bx-edit' style='color:#015e1b; font-size: 20px;'
+                        (click)='onEdit(indexOfelement)' data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Edit"></i></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>

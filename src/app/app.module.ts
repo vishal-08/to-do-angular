@@ -11,13 +11,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { TodoService } from './todo.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ListComponent } from './list/list.component';
+import { EditComponent } from './home/edit/edit.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddNotesComponent
+    AddNotesComponent,
+    ListComponent,
+    EditComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -25,7 +32,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule,ReactiveFormsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
     
   ],
   providers: [DatePipe, TodoService],

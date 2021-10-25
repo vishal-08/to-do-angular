@@ -15,11 +15,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let list of completedArray; let indexOfelement=index;">
-                    <th scope="row">{{indexOfelement + 1}}</th>
-                    <td>{{list.title}}</td>
-                    <td>{{list.detail}}</td>
-                    <td>{{list.dueDate.slice(0,10)}}</td>
+                <tr *ngFor="let list of completedArray; let indexOfelement=index;" style="border: none;">
+                    <th scope="row"><del>{{indexOfelement + 1}}</del></th>
+                    <td><del>{{list.title}}</del></td>
+                    <td><del>{{list.detail}}</del></td>
+                    <td><del>{{list.dueDate.slice(0,10)}}</del></td>
                     <td><i class='bx bxs-trash-alt mx-3' style='color:#fb0909; font-size: 20px;'
                              data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Delete" (click)="completedDelete(indexOfelement)"></i>

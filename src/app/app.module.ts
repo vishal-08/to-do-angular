@@ -21,7 +21,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CompletedListComponent } from './completed-list/completed-list.component';
 import { ManageTodoService } from './manage-todo.service';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-
+import { NgxSortableModule } from 'ngx-sortable'
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    Ng2OrderModule
+    NgxSortableModule
   ],
   providers: [DatePipe, TodoService, CompletedService, ManageTodoService],
   bootstrap: [AppComponent]

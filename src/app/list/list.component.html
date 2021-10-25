@@ -12,9 +12,10 @@
                 <th scope="col">Actions</th>
             </tr>
         </thead>
-        <tbody >
-            <tr  *ngFor="let list of listsArray | orderBy: key: reverse ; let indexOfelement=index; " >
-                <th scope="row">{{indexOfelement + 1}}</th>
+        <tbody class="table-row">
+            
+            <tr  *ngFor="let list of listsArray; let indexOfelement=index; " >
+                <td scope="row">{{indexOfelement + 1}}</td>
                 <td>{{list.title}}</td>
                 <td>{{list.detail}}</td>
                 <td #rowEl>{{list.dueDate}}</td>

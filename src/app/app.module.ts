@@ -14,7 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './home/edit/edit.component';
 import { ToastrModule } from 'ngx-toastr';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CompletedService } from './list/completed.service';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { CompletedListComponent } from './completed-list/completed-list.component';
+import { ManageTodoService } from './manage-todo.service';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 @NgModule({
@@ -24,6 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     AddNotesComponent,
     ListComponent,
     EditComponent,
+    CompletedListComponent,
 
   ],
   imports: [
@@ -34,10 +41,13 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
-    
+    ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    CollapseModule.forRoot(),
+    Ng2OrderModule
   ],
-  providers: [DatePipe, TodoService],
+  providers: [DatePipe, TodoService, CompletedService, ManageTodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

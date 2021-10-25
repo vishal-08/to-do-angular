@@ -4,36 +4,48 @@
 
         </div>
         <div class="col-md-6">
-            <form action="" >
+            <form action="">
 
-             
+
                 <h2 style="text-align: center;">Update Task</h2>
                 <div class="input-group mb-3">
-                    
-                    <span class="input-group-text"><i class='bx bx-align-right' style="font-size: 20px;"></i></span>
-                    <input type="text" class="form-control title" placeholder="Title" name="title" [(ngModel)] = "title">
-                  </div>
 
-                    
+                    <span class="input-group-text"><i class='bx bx-align-right' style="font-size: 20px;"></i></span>
+                    <input type="text" class="form-control title" #titleEl placeholder="Title" name="title"
+                        [(ngModel)]="title">
+                </div>
+
+
 
                 <div class="input-group mb-3">
-                    
+
                     <span class="input-group-text"><i class='bx bx-detail' style="font-size: 20px;"></i></span>
-                    <input type="text" class="form-control detail" placeholder="Details" name="detail" [(ngModel)] = "detail" >
-                  </div>
-                  
-
-                  <div class="input-group mb-3">
-                   
-                    <span class="input-group-text"><i class='bx bx-calendar-event' style="font-size: 20px;"></i></span>
-                    <input type="date" class="form-control dueDate" placeholder="Due Date" name="duedate" [(ngModel)] = "duedate">
-                  </div>
-                  
+                    <input type="text" class="form-control detail" #detailEl placeholder="Details" name="detail"
+                        [(ngModel)]="detail">
+                </div>
 
 
-                <button class="btn btn-primary" data-bs-toggle="tooltip"  title="Update Button">Update</button>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
 
-                <button class="btn btn-info mx-3" (click)="onCancel()" data-bs-toggle="tooltip"  title="Go back to Home">Cancel</button>
+                            <span class="input-group-text"><i class='bx bx-calendar-event'
+                                    style="font-size: 20px;"></i></span>
+                            <div>
+                                <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                                     #dateEl name="dueDate" [(ngModel)] = "dueDate">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+
+                <button class="btn btn-primary" data-bs-toggle="tooltip" title="Update Button"
+                    (click)="update()">Update</button>
+
+                <button class="btn btn-info mx-3" (click)="onCancel()" data-bs-toggle="tooltip"
+                    title="Go back to Home">Cancel</button>
 
             </form>
         </div>

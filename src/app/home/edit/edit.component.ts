@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common'
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit',
@@ -8,25 +11,58 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditComponent implements OnInit {
   
+  @ViewChild('titleEl', { static: true }) titleEl!: ElementRef;
+  @ViewChild('detailEl', { static: true }) detailEl!: ElementRef;
+  @ViewChild('dateEl', { static: true }) dateEl!: ElementRef;
+
   listsArray = JSON.parse(localStorage.getItem('taskData')!)
      id = this.route.snapshot.params['id']
    
      title = this.listsArray[this.id].title
      detail = this.listsArray[this.id].detail
-     duedate = this.listsArray[this.id].dueDate
-   
+     date = this.listsArray[this.id].dueDate.slice(0,10)
+    dueDate =this.datepipe.transform(this.date, 'MM/dd/yyyy');
+    
    
 
-  constructor(private route: ActivatedRoute, private _router : Router) { }
+  constructor(private route: ActivatedRoute, private _router : Router,  private fb: FormBuilder, public datepipe: DatePipe, private toastr : ToastrService) { }
 
+//  localArray = JSON.parse(localStorage.getItem('taskData')!)
+ 
+ 
   ngOnInit(): void {
     
-
+  //  console.log(this.latest_date)
+    
     
     
   }
+
+  
   onCancel(){
     this._router.navigate(['/home'])
+  }
+
+  update(){
+
+    const taskObj ={
+      title : this.titleEl.nativeElement.value,
+      detail : this.detailEl.nativeElement.value,
+      dueDate : this.dateEl.nativeElement.value 
+
+    }
+   
+    this.listsArray.splice(this.id, 1, taskObj)
+
+    localStorage.setItem("taskData", JSON.stringify(this.listsArray))
+
+    this.toastr.success("Data Upated Successfully")
+
+    setTimeout(() => {
+      this._router.navigate(['/'])
+    }, 1000);
+    
+
   }
 
 }

@@ -10,16 +10,16 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  listsArray : any = []
-  
-  
+ 
+  listsArray : any =[]
+  completedArray : any = []
 
   constructor(private _task : TodoService, private _router : Router) { }
 
   ngOnInit(): void {
+    this.completedArray = JSON.parse(localStorage.getItem('completedTask')!)
     this.listsArray = JSON.parse(localStorage.getItem('taskData')!)
-    console.log(this.listsArray)
+    // console.log(this.completedArray)
     
   }
 

@@ -20,8 +20,10 @@ import { CompletedService } from './list/completed.service';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { CompletedListComponent } from './completed-list/completed-list.component';
 import { ManageTodoService } from './manage-todo.service';
-import { Ng2OrderModule } from 'ng2-order-pipe';
-import { NgxSortableModule } from 'ngx-sortable'
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { SortableModule } from 'ngx-bootstrap/sortable';
+import {DragDropModule} from '@angular/cdk/drag-drop'
+import { ManageTaskService } from './manage-task.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,11 @@ import { NgxSortableModule } from 'ngx-sortable'
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    NgxSortableModule
+    AccordionModule.forRoot(),
+    SortableModule.forRoot(),
+    DragDropModule
   ],
-  providers: [DatePipe, TodoService, CompletedService, ManageTodoService],
+  providers: [DatePipe, TodoService, CompletedService, ManageTodoService, ManageTaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

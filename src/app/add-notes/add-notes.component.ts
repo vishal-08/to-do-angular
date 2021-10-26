@@ -35,7 +35,7 @@ export class AddNotesComponent implements OnInit {
 
     this.createTaskForm()
     //  this.tasks = JSON.parse(localStorage.getItem('taskData')!)
-    //  console.log(this.tasks)
+    console.log(this.pickDate.nativeElement.value)
     console.log(window.Date().slice(4, 15))
   }
 
@@ -43,7 +43,10 @@ export class AddNotesComponent implements OnInit {
     this.taskForm = this.fb.group({
       title: [null, Validators.required],
       detail: [null, [Validators.required, Validators.minLength(10)]],
-      dueDate: [null, Validators.required]
+      dueDate: [null, Validators.required],
+      createdAt : new Date(),
+      status : 'TODO',
+      modifiedAt : [null]
 
     })
   }

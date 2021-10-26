@@ -1,7 +1,17 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+// import { ManageTaskService } from '../manage-task.service';
+
+
+interface taskObject {
+  id: number;
+  title: string;
+  description : string;
+  duedate: string;
+}
 
 @Component({
   selector: 'app-list',
@@ -9,6 +19,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+
+  @ViewChild('list', { static: true }) list!: ElementRef;
+
+
    @ViewChild('rowEl', { static: true }) rowEl!: ElementRef;
   
   listsArray:any = []
@@ -19,7 +33,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getlist()
-    console.log(this.listsArray)
+    console.log(this.list)
   }
 
   getlist(){
@@ -62,11 +76,10 @@ onEdit(index: any){
 onComplete(id: number){
   
   const completedObj = this.listsArray[id]
-  // console.log(completedObj)
-  // console.log(this.listsArray)
+   console.log(completedObj.status)
+   completedObj.status = "DONE"
+   
   this.completedTask.push(this.listsArray[id])
-  // console.log(this.completedTask)
-  // this.addCompletedTask(completedObj)
 
 
   if(window.confirm('Are sure you want to send it to completed?')){
@@ -101,20 +114,8 @@ addCompletedTask(completedObj: any ){
   
 }
 
-key = 'id'
-reverse: boolean = false
-sortDate(){
-  if(this.reverse)
-  {
-    let newArr = this.listsArray.sort((a:any, b:any) => a.index - b.index)
-    this.listsArray = newArr
-  }
-  else{
-    let newArr = this.listsArray.sort((a:any, b:any) => b.index - a.index)
-    this.listsArray = newArr
-  }
-  this.reverse = !this.reverse
+drop(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.listsArray, event.previousIndex, event.currentIndex);
 }
-
 
 }

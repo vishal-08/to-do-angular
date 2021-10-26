@@ -1,3 +1,4 @@
+
 <div id="container-el" class="container">
     <div class="row">
         <div class="col-md-2"></div>
@@ -26,7 +27,7 @@
  
 
     <footer>
-        <app-completed-list></app-completed-list>
+        <app-completed-list *ngIf="listsArray.length > 0 || completedArray.length > 0" ></app-completed-list>
     </footer>
 </div>
 </div>

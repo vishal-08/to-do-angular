@@ -21,8 +21,9 @@ export class EditComponent implements OnInit {
      title = this.listsArray[this.id].title
      detail = this.listsArray[this.id].detail
      date = this.listsArray[this.id].dueDate.slice(0,10)
-    dueDate =this.datepipe.transform(this.date, 'MM/dd/yyyy');
-    
+    dueDate =this.datepipe.transform(this.date, 'MM/dd/yyyy')
+    createdAt = this.listsArray[this.id].createdAt
+    status = this.listsArray[this.id].status
    
 
   constructor(private route: ActivatedRoute, private _router : Router,  private fb: FormBuilder, public datepipe: DatePipe, private toastr : ToastrService) { }
@@ -32,7 +33,7 @@ export class EditComponent implements OnInit {
  
   ngOnInit(): void {
     
-  //  console.log(this.latest_date)
+   console.log()
     
     
     
@@ -48,8 +49,10 @@ export class EditComponent implements OnInit {
     const taskObj ={
       title : this.titleEl.nativeElement.value,
       detail : this.detailEl.nativeElement.value,
-      dueDate : this.dateEl.nativeElement.value 
-
+      dueDate : this.dateEl.nativeElement.value, 
+      modifiedAt : new Date(),
+      createdAt : this.createdAt,
+      status :this.status
     }
    
     this.listsArray.splice(this.id, 1, taskObj)

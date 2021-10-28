@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { parseTwoDigitYear } from 'ngx-bootstrap/chronos/units/year';
 import { ToastrService } from 'ngx-toastr';
+import { ManageTodoService } from '../manage-todo.service';
 
 import { Task } from '../task';
 import { TodoService } from '../todo.service';
@@ -22,10 +23,10 @@ export class AddNotesComponent implements OnInit {
   taskForm!: FormGroup;
   tasks: any = []
   task: any = {}
+  list : any = []
 
 
-
-  constructor(private _router: Router, private fb: FormBuilder, private toastr: ToastrService, private element: ElementRef, public datepipe: DatePipe) {
+  constructor(private _managetodo :ManageTodoService,  private _router: Router, private fb: FormBuilder, private toastr: ToastrService, private element: ElementRef, public datepipe: DatePipe) {
 
   }
 
@@ -34,26 +35,28 @@ export class AddNotesComponent implements OnInit {
   ngOnInit(): void {
 
     this.createTaskForm()
-    //  this.tasks = JSON.parse(localStorage.getItem('taskData')!)
-    console.log(this.pickDate.nativeElement.value)
+    
+    
     console.log(window.Date().slice(4, 15))
   }
 
   createTaskForm() {
+    this.list = this._managetodo.getList()
     this.taskForm = this.fb.group({
+      
       title: [null, Validators.required],
       detail: [null, [Validators.required, Validators.minLength(10)]],
       dueDate: [null, Validators.required],
       createdAt : new Date(),
       status : 'TODO',
-      modifiedAt : [null]
-
+      modifiedAt : [null],
+      id : (this.list.length) + 1
     })
   }
 
   onSave() {
 
-    this.tasks = JSON.parse(localStorage.getItem('taskData')!)
+    this.tasks = this._managetodo.getList()
     this.tasks = this.tasks || []
     this.tasks.push(this.taskForm.value)
     localStorage.setItem("taskData", JSON.stringify(this.tasks))
@@ -65,7 +68,7 @@ export class AddNotesComponent implements OnInit {
   addTask(task: any) {
     let tasks = []
     if (localStorage.getItem('taskData')) {
-      tasks = JSON.parse(localStorage.getItem('taskData')!)
+      tasks = this._managetodo.getList()
       tasks = [task, ...tasks]
 
       localStorage.setItem("taskData", JSON.stringify(this.tasks))
@@ -83,56 +86,35 @@ export class AddNotesComponent implements OnInit {
     this._router.navigate(['/home'])
   }
   today() {
-    this.createTaskForm()
-    var currentDate = new Date(new Date().getTime());
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var duedate = month + "/" + day + "/" + year
+    const latestDate  = this._managetodo.today()
+    
     this.taskForm.patchValue({
-      dueDate : duedate
+      dueDate : latestDate
     })
-    // console.log(this.pickDate.nativeElement)
-    console.log(duedate)
-    // // dateEl.value = 10/12/2021
-    // this.dateEl.nativeElement.value = "10/04/2021"
-
   }
 
   tomorrow() {
-    var currentDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var duedate = month + "/" + day + "/" + year
+    const latestDate  = this._managetodo.tomorrow()
+    
     this.taskForm.patchValue({
-      dueDate : duedate
+      dueDate : latestDate
     })
-    console.log(duedate)
 
   }
   nextWeek() {
-    var currentDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000) * 7);
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var duedate = month + "/" + day + "/" + year
+    const latestDate  = this._managetodo.nextWeek()
+    
     this.taskForm.patchValue({
-      dueDate : duedate
+      dueDate : latestDate
     })
-    console.log(duedate)
   }
 
   nextMonth() {
-    var currentDate = new Date(new Date().getTime() + (24 * 60 * 60 * 1000) * 30);
-    var day = currentDate.getDate()
-    var month = currentDate.getMonth() + 1
-    var year = currentDate.getFullYear()
-    var duedate = month + "/" + day + "/" + year
+    const latestDate  = this._managetodo.nextMonth()
+    
     this.taskForm.patchValue({
-      dueDate : duedate
+      dueDate : latestDate
     })
-    console.log(duedate)
   }
 
 

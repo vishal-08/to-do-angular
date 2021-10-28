@@ -16,8 +16,8 @@
 
                 </div>
 
-                <small [class.d-none]="taskForm.get('title').valid || taskForm.get('title').untouched"
-                    class="text-danger">Title Field is required</small>
+                <!-- <small [class.d-none]="taskForm.get('title').valid || taskForm.get('title').untouched"
+                    class="text-danger">Title Field is required</small> -->
 
                 <div class="input-group mb-3">
 
@@ -25,12 +25,12 @@
                     <input [class.is-invalid]="taskForm.get('detail').invalid && taskForm.get('detail').touched"
                         type="text" class="form-control" placeholder="Details" formControlName="detail" #detail>
                 </div>
-                <div *ngIf="taskForm.get('detail').invalid && taskForm.get('detail').touched">
+                <!-- <div *ngIf="taskForm.get('detail').invalid && taskForm.get('detail').touched">
                     <small *ngIf="taskForm.get('detail').errors?.required" class="text-danger">Detail Field is
                         required</small>
                     <small *ngIf="taskForm.get('detail').errors?.minlength" class="text-danger">Minimum 10 characters
                         are must</small>
-                </div>
+                </div> -->
 
                 <div class="row">
                     <div class="col-md-8">
@@ -63,7 +63,7 @@
                             </ul>
                         </div>
                     </div>
-                    <small [class.d-none]="taskForm.get('dueDate').valid || taskForm.get('dueDate').untouched" class="text-danger"  >Date is required</small>
+                    <!-- <small [class.d-none]="taskForm.get('dueDate').valid || taskForm.get('dueDate').untouched" class="text-danger"  >Date is required</small> -->
                 </div>
 
 

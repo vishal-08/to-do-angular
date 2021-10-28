@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 
+import { ManageTaskService } from '../manage-task.service';
+import { ManageTodoService } from '../manage-todo.service';
+
 @Component({
   selector: 'app-completed-list',
   templateUrl: './completed-list.component.html',
@@ -10,32 +13,30 @@ import { ToastrService } from 'ngx-toastr';
 export class CompletedListComponent implements OnInit {
 
   listsArray : any =[]
-  completedArray : any = []
+  
   isCollapsed = false;
   countArray!: number;
 
-  constructor(private toastr : ToastrService) { }
+  constructor(private toastr : ToastrService, private _task : ManageTaskService, private _managetodo : ManageTodoService) { }
 
   ngOnInit(): void {
-    this.completedArray = JSON.parse(localStorage.getItem('completedTask')!)
-    this.listsArray = JSON.parse(localStorage.getItem('taskData')!)
-    this.countArray = this.completedArray.length
+  
+     this.listsArray = this._task.manageComplete()
+    
   }
 
-
+  onDelete(index: any) {
+    this._managetodo.deleteItem(index)
+    location.reload()
+  }
   
+  onUnDone(id: any){
+    this._managetodo.onIncomplete(id)
+    location.reload()
+  }
   
   
   completedDelete(index : number){
-    if(window.confirm('Are sure you want to delete this item ?')){
-      this.completedArray.splice(index, 1)
-    localStorage.setItem("completedTask",JSON.stringify(this.completedArray))
-    this.toastr.warning("Completed Task Deleted Successfully")
-     }
-    
-    // this.getlist()
-    setTimeout(() => {
-      location.reload()
-    }, 1000);
+   
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common'
 import { ToastrService } from 'ngx-toastr';
+import { ManageTodoService } from 'src/app/manage-todo.service';
 
 @Component({
   selector: 'app-edit',
@@ -26,14 +27,14 @@ export class EditComponent implements OnInit {
     status = this.listsArray[this.id].status
    
 
-  constructor(private route: ActivatedRoute, private _router : Router,  private fb: FormBuilder, public datepipe: DatePipe, private toastr : ToastrService) { }
+  constructor(private _managetodo : ManageTodoService,  private route: ActivatedRoute, private _router : Router,  private fb: FormBuilder, public datepipe: DatePipe, private toastr : ToastrService) { }
 
 //  localArray = JSON.parse(localStorage.getItem('taskData')!)
  
  
   ngOnInit(): void {
     
-   console.log()
+ 
     
     
     

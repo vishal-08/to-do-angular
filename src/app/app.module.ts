@@ -25,6 +25,7 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
 import {DragDropModule} from '@angular/cdk/drag-drop'
 import { ManageTaskService } from './manage-task.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
